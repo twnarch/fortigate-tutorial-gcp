@@ -25,3 +25,9 @@ provider "google-beta" {
   region  = var.GCE_REGION
   zone    = "${var.GCE_REGION}-b"
 }
+
+
+variable GCP_Org {
+  type = string
+  description = "GCP Org to use"
+}
