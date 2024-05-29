@@ -2,7 +2,8 @@
 # an image different than the newest 7.0 BYOL series.
 data "google_compute_image" "fgt_image" {
   project         = "fortigcp-project-001"
-  family          = "fortigate-70-byol"
+  #family          = "fortigate-70-byol" - TN commented this out
+  family          = "fortigate-70-payg"
 }
 
 # Pull information about subnets we will connect to FortiGate instances. Subnets must
