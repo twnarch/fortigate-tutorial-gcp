@@ -27,9 +27,47 @@ resource "google_project_service" "container" {
 
 
 
-resource "google_organization_policy" "services_policy" {
+// TN configuring the Org Policies
+
+
+resource "google_organization_policy" "vmExternalIP_policy" {
   org_id     = var.GCP_Organization
   constraint = "compute.vmExternalIpAccess"
+
+  list_policy {
+    allow {
+      all = true
+    }
+  }
+}
+
+resource "google_organization_policy" "ShieldedVM_policy" {
+  org_id     = var.GCP_Organization
+  constraint = "compute.requireShieldedVm"
+
+  boolean_policy {
+    enforced = false
+  }
+}
+
+
+
+resource "google_organization_policy" "CanIPForward_policy" {
+  org_id     = var.GCP_Organization
+  constraint = "compute.vmCanIpForward"
+
+  list_policy {
+    allow {
+      all = true
+    }
+  }
+}
+
+
+
+resource "google_organization_policy" "trustedImageProjects_policy" {
+  org_id     = var.GCP_Organization
+  constraint = "compute.trustedImageProjects"
 
   list_policy {
     allow {
