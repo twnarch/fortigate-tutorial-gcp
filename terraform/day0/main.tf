@@ -27,11 +27,11 @@ module "fortigates" {
      "${var.prefix}sb-hasync",
      "${var.prefix}sb-mgmt"
    ]
-
-  license_files   = [
-    "lic1.lic",
-    "lic2.lic"
-  ]
+#TN commented the licenses out
+  #license_files   = [
+  #  "lic1.lic",
+  #  "lic2.lic"
+  #]
 
   # If creating sample VPC Networks in the same configuration - wait for them to be created!
   # Remove this explicit dependency if using your own pre-existing networks.
