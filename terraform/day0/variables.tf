@@ -30,4 +30,4 @@ provider "google-beta" {
 variable GCP_Org {
   type = string
   description = "GCP Org to use"
-} // TN adding Org
+} // TN adding Org variable
