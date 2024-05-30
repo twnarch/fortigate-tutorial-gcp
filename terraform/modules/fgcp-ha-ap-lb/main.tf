@@ -98,7 +98,7 @@ locals {
 }
 
 resource "google_compute_instance" "fgt-vm" {
-  count                  = 2
+  count                  = 1 // TN changed it to 1
 
   zone                   = local.zones[count.index]
   name                   = "${var.prefix}vm${count.index+1}-${local.zones_short[count.index]}"
@@ -160,7 +160,7 @@ resource "google_compute_region_health_check" "health_check" {
 }
 
 resource "google_compute_instance_group" "fgt-umigs" {
-  count                  = 2
+  count                  = 1 // TN changed from 2 to 1
 
   name                   = "${var.prefix}umig${count.index}-${local.zones_short[count.index]}"
   zone                   = google_compute_instance.fgt-vm[count.index].zone
@@ -177,9 +177,9 @@ resource "google_compute_region_backend_service" "ilb_bes" {
   backend {
     group                = google_compute_instance_group.fgt-umigs[0].self_link
   }
-  backend {
-    group                = google_compute_instance_group.fgt-umigs[1].self_link
-  }
+  # backend {
+  #   group                = google_compute_instance_group.fgt-umigs[1].self_link
+  # } // TN commented out
 
   health_checks          = [google_compute_region_health_check.health_check.self_link]
   connection_tracking_policy {
